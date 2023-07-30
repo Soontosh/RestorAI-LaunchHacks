@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/css/upload.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/navbar.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <title>Uploaded Image</title>
+    <script defer>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.container')
+            document.querySelector('.slider').addEventListener('input', (e) => {
+                container.style.setProperty('--position', `${e.target.value}%`);
+            })
+        })
+
+        $( document ).ready(function() {
+            $('#uploadButton').click(function(){ $('#imgupload').trigger('click'); });
+            document.getElementById('imgupload').addEventListener('change', function (event) {
+                console.log("change detected")
+                var formData = new FormData()
+                formData.append('file', $('#imgupload').prop('files')[0])
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/uploadImg',
+                    data: formData,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function(response) {
+                        console.log('uploaded successfully')
+                        window.location.href = response.redirect
+                    },
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="home">
+        <nav class="navBar" id="mainNav" style="position: absolute;">
+            <ul>
+                <a href="/home" id="homeLink"><img src="\static\images\logo.png"></a>
+            </ul>
+        </nav>
+    <main>
+        <div class="container">
+            <div class="img-container">
+                <!--<img src=" {{ imgPath }} ">-->
+                <img src="{{ imgPath }}" alt="" class="image-before slider-image">
+                <img src="{{ resultPath }}" alt="" class="image-after slider-image">
+            </div>
+            <input type="range" min="0" max="100" value="50" class="slider">
+            <div class="slider-line"></div>
+            <div class="slider-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#currentColor" viewBox="0 0 256 256"><path d="M136,40V216a8,8,0,0,1-16,0V40a8,8,0,0,1,16,0ZM96,120H35.31l18.35-18.34A8,8,0,0,0,42.34,90.34l-32,32a8,8,0,0,0,0,11.32l32,32a8,8,0,0,0,11.32-11.32L35.31,136H96a8,8,0,0,0,0-16Zm149.66,2.34-32-32a8,8,0,0,0-11.32,11.32L220.69,120H160a8,8,0,0,0,0,16h60.69l-18.35,18.34a8,8,0,0,0,11.32,11.32l32-32A8,8,0,0,0,245.66,122.34Z"></path></svg>
+            </div>
+        </div>
+    </main>
+    <div class="buttons">
+        <a href="{{ resultPath }}" download="converted image"><button type="button" id="downloadButton" href="{{ imgPath }}" download> Download </button></a>
+        <input type="file" id="imgupload" style="display: none;">
+        <button type="button" id="uploadButton"> Upload </button>
+    </div>
+</body>
+</html>

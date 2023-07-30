@@ -1,0 +1,161 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background-color: #5E81AC;
+}
+
+.slider-image {
+    display: block;
+    max-width: 100%;
+}
+
+main {
+    display: grid;
+    place-items: center;
+    height: fit-content;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 17vh;
+    margin-bottom: 10vh;
+}
+
+.container {
+    display: grid;
+    place-content: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    --position: 50%;
+    max-height: 512px;
+    max-width: 512px;
+    transform: scale(1.23);
+}
+
+.img-container {
+    max-width: 800px;
+    max-height: 90vh;
+    position: relative;
+    aspect-ratio: 1/1;
+}
+
+.slider-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left;
+}
+
+.image-before {
+    position: absolute;
+    inset: 0;
+    width: var(--position);
+}
+
+.slider {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;   
+    cursor: pointer;
+}
+
+.slider:focus-visible ~ .slider-button {
+    outline: 5px solid black;
+    outline-offset: 3px;
+}
+
+.slider-line {
+    position: absolute;
+    inset: 0;
+    width: .2rem;
+    height: 100%;
+    background-color: white;
+    left: var(--position);
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+.slider-button {
+    position: absolute;
+    background-color: white;
+    color: black;
+    padding: .5rem;
+    border-radius: 100vw;
+    display: grid;
+    place-items: center;
+    top: 50%;
+    left: var(--position);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    box-shadow: 2px 2px 1px hsl(0, 50%, 2%, .5);
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80vw;
+    height: 10vh;
+    margin-left: auto;
+    margin-right: auto;
+    flex-direction: column;
+}
+
+#downloadButton {
+    height: 80%;
+    width: 20%;
+    padding: 5px 3px;
+    min-width:fit-content;
+    min-height: fit-content;
+
+    border: none;
+    border-radius: 25px;
+    background-color: #292F36;
+    font-size: 3.5rem;
+    color: white;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    
+    margin-bottom: 0.3em;
+    transition: all 0.5s;
+}
+
+#uploadButton {
+    padding: 5px;
+    margin-bottom: -20px;
+
+    border: none;
+    border-radius: 25px;
+    background-color: #292F36;
+    font-size: 2rem;
+    color: white;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+
+    height: 100%;
+    width: 10%;
+    padding: 5px 3px;
+    min-width:fit-content;
+    min-height: fit-content;
+    transition: all 0.5s;
+}
+
+button:hover {
+    opacity: 0.7;
+    transform: scale(1.1);
+}
+
+#homeLink {
+    margin-top: -9vh;
+}
+
+.img-container img {
+}

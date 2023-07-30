@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html></html>
+<head>
+    <link rel="stylesheet" href="\static\css\login.css" />
+    <link rel="stylesheet" href="\static\css\popup.css" />
+    <script src="https://kit.fontawesome.com/5bd078cced.js" crossorigin="anonymous"></script>
+    <title>Sign In</title>
+</head>
+
+<body>
+    <div class="pageContainer">
+        <div class="signBox">
+            <h1>Sign In</h1>
+            <form method="post">
+                {{ form.hidden_tag() }}
+                <div class="input">
+                    <div class="inputField">
+                        <i class="fa-solid fa-user"></i>
+                        {{ form.username }}
+                    </div>
+                </div>
+                
+                <div class="input">
+                    <div class="inputField">
+                        <i class="fa-solid fa-lock"></i>
+                        {{ form.password }}
+                    </div>
+                </div>
+
+                {{ form.recaptcha() }}
+                <p>Don't Have an Account? <a href="{{url_for('register')}}">Sign Up</a></p>
+                <div class="buttonInput">
+                    {{ form.submit(class_="submitButton") }}
+                </div>
+            </form>
+        </div>
+    </div>    
+</body>
+
+</html>

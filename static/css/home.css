@@ -1,0 +1,377 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+
+@font-face {
+    font-family: "Acronym";
+    src: url('Acronym ExtraBold.otf');
+}
+
+@font-face {
+    font-family: "AcronymBold";
+    src: url('AcronymBold.otf');
+}
+
+@font-face {
+    font-family: "AcronymRegular";
+    src: url('Acronym Regular.otf');
+}
+
+@font-face {
+    font-family: "AcronymSemiBold";
+    src: url('Acronym SemiBold.otf');
+}
+
+@font-face {
+    font-family: "AcronymThin";
+    src: url('Acronym Thin.otf');
+}
+
+html {
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+}
+
+.uploadDiv {
+    background: #5E81AC;
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    bottom: 3%;
+}
+
+
+.uploadDiv .text h1 {
+    margin: 0;
+    font-size: 10rem;
+    text-overflow: clip;
+    font-family: Acronym;
+    letter-spacing: .02em;
+    z-index: 2;
+    color: #FAD791;
+    width: 80vw;
+}
+
+.uploadDiv .text h2 {
+    margin: 0;
+    font-size: 5vw;
+    font-family: AcronymBold;
+    letter-spacing: -0.003em;
+    z-index: 2;
+    color: #FAD791;
+    width: 80vw;
+}
+
+.uploadDiv .text p{
+    font-size: 2.5rem;
+    z-index: 2;
+    color: white;
+    font: AcronymRegular;
+    width: 80vw;
+}
+
+.uploadDiv .text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 65%;
+    position: relative;
+    margin-top: 0;
+}
+
+
+.uploadDiv .text img {
+    position: absolute;
+    z-index: 1;
+    transform: scale(0.7);
+    min-width: 30%;
+    min-height: 50%;
+
+    left: 40%;
+    top: -100%
+}
+
+.buttonDiv {
+    position: relative;
+    top: 5%;
+}
+
+#fillerButton {
+    pointer-events: none;
+    width: 100%;
+}
+
+
+#uploadButton {
+    z-index: 10;
+    position: absolute;
+    z-index: 10;
+    align-self: center;
+    border-radius: 20px;
+    border: none;
+    min-height: fit-content;
+    top: 115%;
+    min-height: 20%;
+    min-width: min-content;
+    font-size: 4rem;
+    background: #292F36;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: ease-out 0.3s;
+    padding: min(10%, 15px);
+    white-space: nowrap;
+}
+
+#uploadButton:hover {
+    background-color: #4f5a68;
+    transform: scale(1.035);
+}
+
+.home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    position: relative;
+    background: #5E81AC;
+}
+
+/* Convert to second div if the width gets too low */
+
+.secondDiv {
+    height: max(fit-content, 80vh);
+    padding-top: 3%;
+    padding-bottom: 1%;
+    background-color: #001427;
+}
+
+#thirdDiv {
+    padding-bottom: 40px;
+}
+
+.secondDiv img {
+    padding-bottom: -10vh;
+    margin-bottom: -70px;
+    max-width: 80vw;
+}
+
+.imgDescription {
+    color: white;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    align-self: center;
+    text-align: center;
+}
+
+
+.imgDescription h1,
+.imgDescription2 h1 {
+    font-size: 7rem;
+    font-family: AcronymSemiBold;
+    margin: 0;
+    width: 100vw;
+    align-self: center;
+}
+
+.imgDescription p,
+.imgDescription2 p {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 2.5rem;
+    margin-top: 0.1em;
+    margin-right: 1%;
+    margin-left: 1%;
+    width: 80vw;
+}
+
+.imgDescription2 p {
+    width: 70vw;
+}
+
+.imgDescription2 p {
+    margin-top: 0.5em;
+}
+
+.imgDescription2 {
+    color: white;
+    height: 75vh;
+    display: flex;
+    align-items: center;
+}
+
+.textDescription {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5%;
+    text-align: center;
+    margin-left: 10%;
+}
+
+.imgDescription2 img {
+    height: 60%;
+    position: absolute;
+    left: 10%;
+}
+
+#img3 {
+    left: 50%;
+}
+
+.hidden {
+    opacity: 0;
+    filter: blur(5px);
+    transition: all 0.5s;
+}
+
+.secondImg {
+    transform: translateY(100%);
+}
+
+.thirdImg {
+    transform: translateY(-100%);
+}
+
+.secondSign {
+    transform: translateY(-250%);
+}
+
+.thirdSign {
+    transform: translateY(250%);
+}
+
+.hiddenSignature {
+    transform: translateX(50%);
+    transition-delay: 500ms;
+}
+
+.hiddenParagraph {
+    transform: translateX(-50%);
+    transition-delay: 500ms;
+}
+
+.hiddenTextDesc2nd {
+    transform: translateX(50%);
+}
+
+.hiddenTextDesc3rd {
+    transform: translateX(-50%);
+}
+
+.secondSignature {
+    transform: translateY(-300%);
+}
+
+.show {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+    transform: translateX(0%);
+}
+
+.thirdPg {
+    position: absolute;
+    right: 7%;
+}
+
+/*
+input[type="file"] {
+    display: none;
+} */
+
+@media screen and (max-width: 980px) {
+    .uploadDiv .text img {
+        width: 60vh;
+        left: 20svw;
+        bottom: -40px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+}
+
+@media screen and (max-width: 1300px) {
+    .uploadDiv .text h1 {
+        font-size: 8svw;
+    }
+}
+
+
+@media screen and (max-width: 730px) {
+    .uploadDiv .text h1 {
+        font-size: 50px;
+    }
+}
+
+@media screen and (max-width: 760px) {
+    .uploadDiv .text h1 {
+        font-size: 50px;
+    }
+
+    .uploadDiv .text img {
+        left: 0;
+        max-width: 70vw;
+        min-width: 350px;
+        bottom: 10%;
+    }
+}
+
+@media screen and (max-width: 860px) {
+    .uploadDiv .text h2 {
+        font-size: 50px;
+    }
+
+    #fillerButton {
+        width: 70vw;
+    }
+
+    .imgDescription2 img {
+        margin-bottom: 10%;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .uploadDiv .text h2 {
+        display: none;
+    }
+
+    .uploadDiv .text p {
+        font-family: sans-serif;
+        font-size: 15px;
+    }
+
+    .uploadDiv .text img {
+        left: auto;
+        right: auto;
+        margin: 50vw auto 0;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    /* Fix The Image */
+    .imgDescription h1 {
+        font-size: 10vw;
+    }
+}
+
+@media screen and (max-width: 770px) and (min-height: 400px) {
+    .uploadDiv .text img {
+        bottom: -30px;
+    }
+
+    .navBar {
+        position: absolute;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    /* Fix The Image */
+}

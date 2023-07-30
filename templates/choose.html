@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Type</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/choose.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    
+    <script>
+        $( document ).ready(function() {
+            function clickHandler(isColorizer) {
+                if (isColorizer) {
+                    console.log("Clicked!")
+                    //
+                }
+            }
+
+            setTimeout(1) 
+            var colorizer = document.getElementById('colorizer');
+            colorizer.onclick = function() {
+                console.log("Clicked!")
+                window.location.href = "/displayimg"
+            }
+
+            var converter = document.getElementById('converter');
+            converter.onclick = function() {
+                console.log("Clicked!")
+                window.location.href = "/convert"
+            }
+        })
+    </script>
+</head>
+<body>
+    <div class="optionContainer">
+        <div class="imgContainer">
+            <img src="\static\images\manColor.png" id="colorizer" alt="">
+            <figcaption>Colorizer</figcaption>
+        </div>
+
+        <div class="imgContainer" id="converter">
+            <img src="\static\images\BeforeExample.jpeg" alt="">
+            <figcaption>New to Old Image Converter</figcaption>
+        </div>
+    </div>
+</body>
+</html>

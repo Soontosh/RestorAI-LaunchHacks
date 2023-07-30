@@ -1,0 +1,327 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:500');
+
+@font-face {
+    font-family: "AcronymBold";
+    src: url('AcronymBold.otf');
+}
+
+.navBar {
+    background-color: rgba(0, 0, 0, 0);
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 9vh;
+    position: sticky;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+    align-items: center;
+}
+
+#introNav {
+    visibility: hidden;
+}
+
+
+/* center nav on mobile */
+.navBar li {
+    color: #E7DFDD;
+    font-weight: bold;
+    font-size: 1.21rem;
+    font-family: 'Inter';
+    transition: all 0.6s ease-out 0.1s;
+    height: 100%;
+    width: 15%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    position: relative;
+    font-size: 200%;
+    transition: all ease-out 0.3s;
+}
+
+.navBar li a { 
+    margin: 0px; 
+    display: flex; 
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.navbar a {
+    height: 100%;
+    width: 100%;
+}
+
+.navBar ul {
+    list-style: none;
+    /* margin: 2rem; */
+    height: 100%;
+    width: 100%;
+    display: inline-flex;   
+    align-items: center;
+    justify-content: right;
+}
+
+.navBar img {
+    position: absolute;
+    left: 0.4vw;
+    max-height: 85%;
+    cursor: pointer;
+    transition: all ease-out 0.3s;
+}
+
+.navBar li:hover {
+    transform: scale(1.2);
+}
+
+#lastImg {
+    bottom: -14%;
+    left: 94.5%;
+    transition: transform ease-in-out .5s, opacity ease-out .3s;
+    padding: 22px;
+    z-index: 200;
+    pointer-events: all;
+    cursor: default;
+}
+
+.dropdown:hover #lastImg {
+    opacity: 0.5;
+    transform: rotate(120deg) scale(1.1);
+    padding: 22px;
+    right: 5%;
+}
+
+.dropdown {
+    height: 103vh;
+    overflow: hidden;
+    min-width: fit-content;
+    width: 25%;
+    z-index: 110;
+    pointer-events: none;
+    margin-top: 91vh;
+}
+
+.dropdownMenu {
+    transform: translateX(100%);
+    pointer-events: none;
+    opacity: 0;
+    width: 100%;
+    background-color: white;
+    height: 100%;
+    transition: opacity 0.5s, transform 1s;
+    z-index: 111;
+
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+} /* close on scroll */
+
+.dropText {
+    width: 85%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.dropText h1 {
+    opacity: 1;
+    padding-top: 10px;
+    align-self: center;
+    font-family: AcronymBold;
+    font-size: 4rem;
+    margin-bottom: 0;
+}
+
+.dropText p {
+    font-family: Acronym;
+    font-size: 3rem;
+    align-self: center;
+    margin-bottom: 0;
+    opacity: 0.5;
+}
+
+.dropText button,
+form .dropText button {
+    opacity: 1;
+    color: white;
+    background-color: red;
+    border-radius: 20px;
+    margin-top: 15px;
+    width: 80%;
+    height: 45px;
+    font-size: 3rem;
+    cursor: pointer;
+    border: 0;
+}
+
+.settingsButton {
+    
+    background-color: #FF5F1F !important;
+}
+
+.dropText button:hover {
+    opacity: 0.6;
+}
+
+.dropText p span {
+    color: #FF5F1F;
+}
+
+.dropdown:hover .dropdownMenu {
+    opacity: 1;
+    transform: translateX(20%);
+    pointer-events: all;
+    display: block;
+}
+
+.dropdown:hover .dropText {
+    display: flex;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+}
+
+.thinLine {
+    height: 1px;
+    width: 80%;
+    align-self: center;
+    justify-self: center;
+    border-bottom: 1px solid rgba(0,0,0,.5);;
+}
+
+#purchaseOverlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.90);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20000;
+    align-items: center;
+    justify-content: center;
+}
+
+.purchaseBox {
+    background-color: white;
+    width: fit-content;
+    padding: 30px;
+    padding-top: 0;
+    height: 60%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+    background-color: #001427;
+    color: white;
+}
+
+.purchaseBox h1 {
+    font-family: AcronymBold, 'sans-serif';
+    margin-top: 0.3em;
+    font-size: 5rem;
+    margin-bottom: 0;
+    color: #FAD791;
+}
+
+.purchaseRow,
+.purchaseRow .form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.purchaseRow .form {
+    height: 50%
+}
+
+#formPurchase {
+    height: 20%;
+}
+
+.purchaseRow h2 {
+    font-size: 3rem;
+    font-family: Acronym, 'sans-serif';
+    width: 39.5rem;
+    color: #FAD791;
+}
+
+.purchaseRow button,
+.purchaseRow .form button {
+    min-height: fit-content;
+    min-width: fit-content;
+
+    height: 50%;
+    margin-left: 2vw;
+    padding: 0 10%;
+
+    border-radius: 20px;
+    cursor: pointer;
+    border: none;
+
+    background-color: #5E81AC;
+}
+
+.purchaseRow .form input {
+    background: white;
+    border: 0;
+    outline: 0;
+    padding: 13px 9px;
+}
+
+.purchaseRow .form button {
+    height: 195%;
+}
+
+.purchaseBox button {
+    transition: all .2s;
+}
+
+.purchaseBox button:hover {
+    opacity: 0.7;
+    transform: scale(1.1);
+}
+
+#backButton {
+    position: absolute;
+    height: 5%;
+    right: 97%;
+    margin-top: -10px;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+#backButton:hover {
+    scale: 1.2;
+}
+
+@media screen and (max-width: 980px) {
+    .navBar li {
+        visibility: hidden;
+    }
+
+    .navBar ul {
+        display: relative;
+    }
+
+    .navBar ul img {
+        align-self: center;
+    }
+}

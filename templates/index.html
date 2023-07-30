@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/home.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/team.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/img.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script defer src="{{ url_for('static', filename='scroll.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='delete.js') }}"></script>
+
+    <script>
+        function DelAccount() {
+            console.log("Deleting Account...")
+            $.ajax({
+                type: 'POST',
+                url: "/delete",
+                contentType: 'application/json',
+                data: JSON.stringify({"type": "Delete", "username": "{{ username }}"}),
+                success: function (response) {
+                    if (response.hasOwnProperty("redirect")) {
+                        window.location.href = response.redirect;
+                    }
+                }
+            })
+        }
+
+        function DisablePurchase() {
+            document.getElementById("purchaseOverlay").style.display = "none"
+        }
+
+        function EnablePurchase() {
+            document.getElementById("purchaseOverlay").style.display = "flex"
+        }
+
+        function PurchaseCreds(amount, isForm=false, formId = "") {
+            if(isForm) {
+                console.log("Is Form!")
+                amount = Math.round(parseInt(document.getElementById(formId).value));
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: "/purchase",
+                contentType: 'application/json',
+                data: JSON.stringify({"type": "Purchase", "username": "{{ username }}", "amount": amount}),
+                success: function (response) {
+                    if (response.hasOwnProperty("redirect")) {
+                        window.location.href = response.redirect;
+                    }
+                }
+            })
+        }
+
+        $( document ).ready(function() {
+            var renameButton = document.getElementById("renameButton");
+            renameButton.addEventListener("click", function(event){
+                location.href = "/rename"
+            });
+
+            $('#uploadButton').click(function(){ $('#imgupload').trigger('click'); });
+            document.getElementById('imgupload').addEventListener('change', function (event) {
+                console.log("change detected")
+                var formData = new FormData()
+                formData.append('file', $('#imgupload').prop('files')[0])
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/uploadImg',
+                    data: formData,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function(response) {
+                        console.log('uploaded successfully')
+                        window.location.href = response.redirect
+                    },
+                });
+            });
+        });
+
+        
+
+        /*
+        document.getElementById('fileSelector').addEventListener('change', function () {
+            document.getElementById('uploadForm').submit();
+        }); */
+    </script>
+</head>
+
+<body>
+    <div id="purchaseOverlay">
+        <div class="purchaseBox">
+            <img src="\static\images\whiteX.png" id="backButton" onclick="DisablePurchase()">
+            <h1>Purchase Credits</h1>
+            <div class="purchaseRow">
+                <h2>10 Credits</h2>
+                <button onclick="PurchaseCreds(10)">$0.99</button>
+            </div>
+
+            <div class="purchaseRow">
+                <h2>50 Credits</h2>
+                <button onclick="PurchaseCreds(50)">$3.99</button>
+            </div>
+
+            <div class="purchaseRow">
+                <h2>100 Credits</h2>
+                <button onclick="PurchaseCreds(100)">$7.50</button>
+            </div>
+
+            <div class="purchaseRow">
+                <h2>1000 Credits</h2>
+                <button onclick="PurchaseCreds(1000)">$70.00</button>
+            </div>
+
+            <div class="purchaseRow">
+                <h2>10000 Credits</h2>
+                <button onclick="PurchaseCreds(10000)">$650.00</button>
+            </div>
+
+            <div class="purchaseRow" id="formPurchase">
+                <div class="form">
+                    <input type="number" step="1" placeholder="Custom Number" max="100000", id="customForm">
+                    <button onclick="PurchaseCreds(10000, isForm = true, formId = 'customForm')">Purchase</button> <!--  1$ plus any amount of credits * 0.1, standard discounts should be the same -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="home">
+        <nav class="navBar" id="mainNav">
+            <ul>
+                <img src="\static\images\logo.png">
+                <!-- Add Site Logo Here Later -->
+                <!-- Make Navbar Dynamic Later -->
+                <!--
+                <li class="scroll" id="upload"> <a href="#">Quotes</a> </li>
+                <li class="scroll" id="project"> <a href="#">Projects</a> </li>
+                <li class="scroll" id="skill"> <a href="#">Inspiration</a> </li>
+                <li class="scroll" id="contact"> <a href="#">The Team</a> </li>
+                -->
+                <div class="dropdown">
+                    <img src="\static\images\gearIcon.png" id="lastImg">
+                    <div class="dropdownMenu">
+                        <div class="dropText">
+                            <h1>Account Info</h1>
+                            <div class="thinLine"></div>
+                            <p>{{ username }}</p>
+                            <p><span>{{ creditsLeft }}</span> Credits</p>
+
+                            <h1>Settings</h1>
+                            <div class="thinLine"></div>
+                            <button class="settingsButton" onclick="EnablePurchase()">Purchase</button>
+                            <button id="renameButton" class="settingsButton ">Rename</button>
+
+                            <h1>Danger Zone</h1>
+                            <div class="thinLine"></div>
+
+                            <button onclick="DelAccount()">Delete Acc</button>
+                        </div>
+                    </div>
+                </div>
+            </ul>
+        </nav>
+    <div class="uploadDiv">
+        
+        <div class="text">
+            <h1>Coloring the World</h1>
+            <h2>One Image At a Time</h2>
+            <p>Our AI takes greyed out images and gives them color.</p>
+            <img src="/static/images/BeforeExample.jpeg" alt="" style="aspect-ratio: 16/9 * 100;">
+
+            <button id="fillerButton">
+            <form id="uploadForm" method="post" enctype="multipart/form-data">
+                <input type="file" id="imgupload" style="display:none"/> 
+            </form>
+            <button id="uploadButton">Upload Image</button>
+            
+            <!--<i class="fa-solid fa-file-arrow-up"></i>-->
+        </div>
+    </div>
+    </div>
+
+    <div class="secondDiv">
+        
+        <div class="imgDescription">
+            <img src="\static\images\Upscaled.png" alt="" style="height: 45%; width: 45%;">
+            <h1 class="hidden secondImg">"Amazing, Down to Each Pixel!"</h1>
+            <p class="hidden hiddenParagraph">I put in about 5 images and each one came out great!</p>
+            <p class="hidden hiddenSignature">- Kishore</p>
+        </div>
+    </div>
+
+    <div class="secondDiv">
+        <div class="imgDescription2">
+            <img src="\static\images\todayTopicTrans.png" class="hidden hiddenTextDesc3rd">
+            <div class="textDescription hidden hiddenTextDesc2nd">
+                <h1 class="hidden secondImg">"It's Great!"</h1>
+                <p class="hidden">I'm shocked by how accurate the model was able to get in less than a day of training.</p>
+                <p class="hidden secondSign">- Sowmya(Meta Employee)</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="secondDiv" id="thirdDiv">
+        <div class="imgDescription2">
+            <img src="\static\images\ladyNewToOld.png" alt="" id="img3" class="hidden hiddenTextDesc2nd" style="width: 45%;">
+            <div class="textDescription hidden hiddenTextDesc3rd thirdPg">
+                <h1 class="hidden thirdImg">"I'm Shocked!"</h1>
+                <p class="hidden">The fact that this was possible in just three days is crazy.</p>
+                <p class="hidden thirdSign">- Rama</p>
+            </div>
+        </div>
+    </div>
+
+    <!--
+    <div id="teamContainer">
+        <div id="teamHeader">
+            <h1>The Team</h1>
+            
+        </div>
+
+        <div id="teamCardContainer">
+            <div class="cardContainer">
+                <div class="card">
+                    <img src="\static\images\heart.jpg" alt="">
+
+                    <div class="name">Dylan Lim</div>
+
+                    <p>Rising Freshman at UC Davis, interests in machine learning and artificial intelligence.  Created and trained model and transformed data.</p>
+
+                    <i class="fa-brands fa-github fa-2xl githubIcon fa-5x"></i>
+                    <i class="fa-brands fa-github fa-2xl githubIconMain fa-5x"></i>
+                    <i class="fa fa-linkedin-square linkedIcon fa-5x" aria-hidden="true"></i>
+                </div>
+            </div>
+
+            <div class="cardContainer">
+                <div class="card">
+                    <img src="\static\images\heart.jpg" alt="">
+
+                    <div class="name">Santosh Patapati</div>
+                    <p>Freshman at Panther Creek High School. Python and tech enthusiast. Loves all things AI. Created website and generative dataset.</p>
+
+                    <i class="fa-brands fa-github fa-2xl githubIcon fa-5x"></i>
+                    <i class="fa-brands fa-github fa-2xl githubIconMain fa-5x" id="notDylan"></i>
+                </div>
+            </div>
+
+            <div class="cardContainer">
+                <div class="card">
+                    <img src="\static\images\heart.jpg" alt="">
+
+                    <div class="name">Praneeth Muvva</div>
+
+                    <p>Rising Senior in highschool, also loves AI and Java. Scraped majority of dataset data. Praneeth lead the team and came up with the project idea.</p>
+
+                    <i class="fa-brands fa-github fa-2xl githubIcon fa-5x"></i>
+                    <i class="fa-brands fa-github fa-2xl githubIconMain fa-5x" id="notDylan"></i>
+                </div>
+            </div>
+        </div>
+    </div>-->
+</body>
+</html>
